@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background: #f8fafc;
+  background: linear-gradient(180deg, #f6f6f4 0%, #e6efe8 100%);
   color: #0f172a;
 }
 
@@ -13,7 +13,7 @@ body {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -22,8 +22,13 @@ body {
   align-items: center;
   justify-content: center;
   background: rgba(248, 250, 252, 0.95);
-  z-index: 50;
+  z-index: 2000;
   font-size: 1.1rem;
+}
+
+.overlay {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: #0f172a;
 }
 
 .ui {
