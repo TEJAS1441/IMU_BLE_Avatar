@@ -1,0 +1,171 @@
+2025-12-16 19:57:15,312 - INFO - Attempting direct connection to known NU7 MACs.
+2025-12-16 19:57:20,448 - INFO - Attempting direct connection to known NU7 MAC 00:18:80:72:47:91 (NU7_BOT).
+2025-12-16 19:57:20,449 - INFO - Attempting to connect to 00:18:80:72:47:91...
+2025-12-16 19:57:23,792 - INFO - Connected to 00:18:80:72:47:91. (MTU negotiation not supported on Windows)
+2025-12-16 19:57:23,792 - INFO - Connected to 00:18:80:72:47:91 (NU7_BOT)
+2025-12-16 19:57:23,792 - INFO - NU7 MAC 00:18:80:AF:58:63 not found in scan results.
+2025-12-16 19:57:25,162 - INFO - Started notify on 00:18:80:72:47:91 in stage 2.
+2025-12-16 19:57:25,165 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+2025-12-16 19:57:26,167 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+2025-12-16 19:57:26,242 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:27,170 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5587 qy = -0.1149 qz = 0.0000 qw = 0.8214
+IMU2 qx = -0.6539 qy = -0.1135 qz = 0.0014 qw = 0.7480
+IMU3 qx = 0.6687 qy = 0.1880 qz = 0.0000 qw = 0.7194
+IMU4 qx = 0.6154 qy = 0.2017 qz = 0.0001 qw = 0.7620
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:27,187 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:28,178 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5587 qy = -0.1149 qz = 0.0000 qw = 0.8214
+IMU2 qx = -0.6539 qy = -0.1141 qz = 0.0020 qw = 0.7479
+IMU3 qx = 0.6687 qy = 0.1880 qz = 0.0000 qw = 0.7194
+IMU4 qx = 0.6154 qy = 0.2018 qz = 0.0003 qw = 0.7620
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:28,224 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:29,186 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5588 qy = -0.1149 qz = 0.0000 qw = 0.8213
+IMU2 qx = -0.6538 qy = -0.1140 qz = 0.0019 qw = 0.7480
+IMU3 qx = 0.6688 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2021 qz = 0.0005 qw = 0.7620
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:29,257 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:30,191 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5583 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6539 qy = -0.1140 qz = 0.0019 qw = 0.7480
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6153 qy = 0.2030 qz = 0.0013 qw = 0.7617
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:30,248 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:31,199 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1142 qz = 0.0021 qw = 0.7480
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6153 qy = 0.2031 qz = 0.0013 qw = 0.7617
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:31,238 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:32,207 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1148 qz = 0.0026 qw = 0.7479
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2034 qz = 0.0018 qw = 0.7617
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:32,272 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:33,215 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1149 qz = 0.0026 qw = 0.7479
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2037 qz = 0.0021 qw = 0.7615
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:33,262 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:34,223 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1151 qz = 0.0028 qw = 0.7479
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2038 qz = 0.0022 qw = 0.7615
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:34,297 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:35,229 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1154 qz = 0.0031 qw = 0.7478
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2038 qz = 0.0022 qw = 0.7615
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:35,288 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:36,237 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1154 qz = 0.0031 qw = 0.7478
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2039 qz = 0.0023 qw = 0.7615
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:36,322 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:37,243 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1158 qz = 0.0034 qw = 0.7477
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2039 qz = 0.0023 qw = 0.7615
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:37,357 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:38,249 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1159 qz = 0.0035 qw = 0.7477
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2039 qz = 0.0023 qw = 0.7615
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:38,302 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:39,257 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8218
+IMU2 qx = -0.6538 qy = -0.1164 qz = 0.0040 qw = 0.7477
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2037 qz = 0.0021 qw = 0.7615
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:39,337 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:40,264 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5581 qy = -0.1149 qz = 0.0001 qw = 0.8218
+IMU2 qx = -0.6538 qy = -0.1171 qz = 0.0046 qw = 0.7476
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2034 qz = 0.0019 qw = 0.7617
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:40,327 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:41,273 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1174 qz = 0.0048 qw = 0.7475
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2029 qz = 0.0015 qw = 0.7618
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:41,363 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:42,282 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6537 qy = -0.1182 qz = 0.0056 qw = 0.7474
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2029 qz = 0.0015 qw = 0.7618
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:42,353 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:43,289 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1180 qz = 0.0054 qw = 0.7474
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2029 qz = 0.0015 qw = 0.7618
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:43,345 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:44,295 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5583 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6537 qy = -0.1180 qz = 0.0053 qw = 0.7474
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6152 qy = 0.2027 qz = 0.0012 qw = 0.7619
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:44,379 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:45,301 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1169 qz = 0.0044 qw = 0.7476
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6151 qy = 0.2028 qz = 0.0013 qw = 0.7619
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:45,368 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:46,308 - INFO - Data from 00:18:80:72:47:91 (NU7_BOT):
+IMU1 qx = -0.5582 qy = -0.1149 qz = 0.0001 qw = 0.8217
+IMU2 qx = -0.6538 qy = -0.1165 qz = 0.0040 qw = 0.7477
+IMU3 qx = 0.6689 qy = 0.1880 qz = 0.0000 qw = 0.7192
+IMU4 qx = 0.6151 qy = 0.2027 qz = 0.0010 qw = 0.7620
+IMU5 qx = 0.9525 qy = -0.2115 qz = 0.0000 qw = 0.2192
+IMU6 qx = 0.2257 qy = -0.1688 qz = 0.0000 qw = 0.9595
+2025-12-16 19:57:46,403 - INFO - 00:18:80:72:47:91: Received 6 IMU packets
+2025-12-16 19:57:46,676 - WARNING - Error disconnecting 00:18:80:72:47:91: Task <Task pending name='Task-10' coro=<disconnect_all() running at /home/tejas/Documents/nu7/avatar_ble/1_working/./python/ble_client.py:98> cb=[_run_until_complete_cb() at /usr/lib/python3.12/asyncio/base_events.py:182]> got Future <Future pending> attached to a different loop

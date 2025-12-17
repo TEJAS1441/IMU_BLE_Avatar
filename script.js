@@ -216,11 +216,11 @@ function createBrandingTexture(text) {
   // Black border (stroke) for text
   ctx.strokeStyle = '#000000';
   ctx.lineWidth = 8;
-  ctx.strokeText('nu7.ai', cx, cy);
+  ctx.strokeText('nu7STUDIO', cx, cy);
   
   // Orange fill for text
   ctx.fillStyle = '#eee8e8ff';  // dark orange
-  ctx.fillText('nu7.ai', cx, cy);
+  ctx.fillText('nu7STUDIO', cx, cy);
 
   return new THREE.CanvasTexture(canvas);
 }
@@ -242,6 +242,43 @@ const loader = new GLTFLoader();
 const overlay = document.getElementById("overlay");
 let modelLoaded = false;
 let wsConnected = false;
+// Calibration state
+const calibration = {}; // imuKey -> THREE.Quaternion to apply before imuQuat
+let latestSensors = null; // store most recent sensors payload for calibration/sample
+
+// Small UI for calibration
+const ui = document.createElement('div');
+ui.className = 'ui';
+ui.innerHTML = `<div style="font-weight:600;margin-bottom:8px">Calibration</div><button id="cal-btn" class="btn">Calibrate Pose (C)</button><div id="cal-status" style="margin-top:8px;font-size:0.9rem;color:#334155">Not calibrated</div>`;
+document.body.appendChild(ui);
+const calBtn = document.getElementById('cal-btn');
+const calStatus = document.getElementById('cal-status');
+
+function setCalStatus(msg) {
+  if (calStatus) calStatus.innerText = msg;
+}
+
+calBtn.onclick = () => doCalibration();
+window.addEventListener('keydown', (e) => { if (e.key === 'c' || e.key === 'C') doCalibration(); });
+
+function doCalibration() {
+  if (!latestSensors) {
+    setCalStatus('No IMU data yet');
+    return;
+  }
+  // For each imu in the mapping, compute calibration = imuQuat^{-1}
+  let count = 0;
+  for (const imuKey in imuToBone) {
+    const q = latestSensors[imuKey];
+    if (!q) continue;
+    const imuQuat = new THREE.Quaternion(q.x, q.y, q.z, q.w).normalize();
+    const inv = imuQuat.clone().invert();
+    calibration[imuKey] = inv;
+    count++;
+  }
+  setCalStatus(`Calibrated ${count} IMUs`);
+  console.log('Calibration map:', calibration);
+}
 
 function hideOverlay() {
   if (!overlay) return;
@@ -302,14 +339,40 @@ loader.load(
    IMU → BONE MAPPING (BOTTOM WEARABLE)
 ========================================================= */
 
+// Wearable labeling -> bone mapping (corrected):
+// IMU1: left knee (lower leg)
+// IMU2: left foot
+// IMU3: right knee (lower leg)
+// IMU4: right foot
+// IMU5: left pelvis / upper leg
+// IMU6: right pelvis / upper leg
 const imuToBone = {
-  IMU4: "mixamorig1LeftFoot",
-  IMU6: "mixamorig1RightFoot",
-  IMU3: "mixamorig1LeftUpLeg",
   IMU1: "mixamorig1LeftLeg",
-  IMU5: "mixamorig1RightUpLeg",
-  IMU2: "mixamorig1RightLeg",
+  IMU2: "mixamorig1LeftFoot",
+  IMU3: "mixamorig1RightLeg",
+  IMU4: "mixamorig1RightFoot",
+  IMU5: "mixamorig1LeftUpLeg",
+  IMU6: "mixamorig1RightUpLeg",
 };
+/*'''
+Wearable Labelling 
+IMU 1 : left knee 
+IMU 2 : left foot 
+IMU 3 : right knee
+IMU 4 : right foot
+IMU 5 : left pelvis
+IMU 6 : right pelvis
+
+mapping
+const imuToBone = {
+  IMU1: "mixamorig1LeftLeg",      // Left foot
+  IMU2: "mixamorig1LeftFoot",     // Right foot
+  IMU3: "mixamorig1RightLeg",     // Left pelvis
+  IMU4: "mixamorig1RightFoot",       // Left knee (working fine, keep as is)
+  IMU5: "mixamorig1LeftUpLeg",    // Right pelvis
+  IMU6: "mixamorig1RightUpLeg",      // Right knee
+};
+'''*/
 
 /* =========================================================
    WEBSOCKET (LIVE IMU STREAM)
@@ -319,6 +382,9 @@ const ws = new WebSocket(`ws://${location.hostname}:8001/ws`);
 
 ws.onopen = () => {
   console.log("Avatar WebSocket connected");
+//   ws.onmessage = (evt) => {
+//   console.log("WS RECEIVED:", evt.data);
+// };
   wsConnected = true;
   if (overlay) overlay.innerText = "Backend connected — finalizing...";
   checkReady();
@@ -326,9 +392,12 @@ ws.onopen = () => {
 
 ws.onmessage = (event) => {
   if (!skeleton) return;
+  console.log("WS RECEIVED:", event.data);
 
   const data = JSON.parse(event.data);
   const sensors = data.sensors;
+  // store latest sensors for calibration sampling
+  latestSensors = sensors;
 
   for (const imuKey in imuToBone) {
     const boneName = imuToBone[imuKey];
@@ -337,16 +406,15 @@ ws.onmessage = (event) => {
 
     if (!bone || !q) continue;
 
-    const imuQuat = new THREE.Quaternion(
-      q.x,
-      q.y,
-      q.z,
-      q.w
-    ).normalize();
+    const imuQuat = new THREE.Quaternion(q.x, q.y, q.z, q.w).normalize();
 
-    bone.quaternion
-      .copy(boneRestQuat[boneName])
-      .multiply(imuQuat);
+    // apply calibration if available: bone = rest * calibration * imuQuat
+    const cal = calibration[imuKey];
+    if (cal) {
+      bone.quaternion.copy(boneRestQuat[boneName]).multiply(cal).multiply(imuQuat);
+    } else {
+      bone.quaternion.copy(boneRestQuat[boneName]).multiply(imuQuat);
+    }
   }
 };
 
