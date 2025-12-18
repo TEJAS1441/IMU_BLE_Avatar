@@ -15,12 +15,49 @@ QUAT_CHAR_UUID = "12345678-1234-1234-1234-1234567890AC"
 MTU_REQUEST_SIZE = 70
 LOG_FILE = f"nu7_log_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
 
+LOG_TO_FILE = False  # Set to True to enable logging to file
+
+# Configure root logger with console + optional file handler
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+# Console handler
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+fmt = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+ch.setFormatter(fmt)
+logger.addHandler(ch)
+
+# Optional file handler
+if LOG_TO_FILE:
+    fh = logging.FileHandler(LOG_FILE)
+    fh.setLevel(logging.INFO)
+    fh.setFormatter(fmt)
+    logger.addHandler(fh)
+
+def enable_file_logging(enable: bool):
+    """Toggle file logging at runtime."""
+    global LOG_TO_FILE
+    LOG_TO_FILE = bool(enable)
+    logger = logging.getLogger()
+    # remove existing file handlers
+    for h in list(logger.handlers):
+        if isinstance(h, logging.FileHandler):
+            logger.removeHandler(h)
+    # add file handler if requested
+    if LOG_TO_FILE:
+        fh = logging.FileHandler(LOG_FILE)
+        fh.setLevel(logging.INFO)
+        fh.setFormatter(fmt)
+        logger.addHandler(fh)
+
 # Logging setup
 logging.basicConfig(
     filename=LOG_FILE,
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
+
 
 connected_devices = {}  # mac -> BleakClient
 quaternion_data = {}    # mac -> {imu_id -> 8-byte data}

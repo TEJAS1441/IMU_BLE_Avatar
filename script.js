@@ -215,12 +215,12 @@ function createBrandingTexture(text) {
   
   // Black border (stroke) for text
   ctx.strokeStyle = '#000000';
-  ctx.lineWidth = 8;
-  ctx.strokeText('nu7STUDIO', cx, cy);
+  ctx.lineWidth = 30;
+  ctx.strokeText('STUDIO', cx, cy);
   
   // Orange fill for text
   ctx.fillStyle = '#eee8e8ff';  // dark orange
-  ctx.fillText('nu7STUDIO', cx, cy);
+  ctx.fillText('STUDIO', cx, cy);
 
   return new THREE.CanvasTexture(canvas);
 }
@@ -339,20 +339,13 @@ loader.load(
    IMU → BONE MAPPING (BOTTOM WEARABLE)
 ========================================================= */
 
-// Wearable labeling -> bone mapping (corrected):
-// IMU1: left knee (lower leg)
-// IMU2: left foot
-// IMU3: right knee (lower leg)
-// IMU4: right foot
-// IMU5: left pelvis / upper leg
-// IMU6: right pelvis / upper leg
 const imuToBone = {
-  IMU1: "mixamorig1LeftLeg",
-  IMU2: "mixamorig1LeftFoot",
-  IMU3: "mixamorig1RightLeg",
-  IMU4: "mixamorig1RightFoot",
-  IMU5: "mixamorig1LeftUpLeg",
-  IMU6: "mixamorig1RightUpLeg",
+  IMU1: "mixamorig1LeftLeg",      // Left foot
+  IMU2: "mixamorig1LeftFoot",     // Right foot
+  IMU3: "mixamorig1RightLeg",     // Left pelvis
+  IMU4: "mixamorig1RightFoot",       // Left knee (working fine, keep as is)
+  IMU5: "mixamorig1LeftUpLeg",    // Right pelvis
+  IMU6: "mixamorig1RightUpLeg",      // Right knee
 };
 /*'''
 Wearable Labelling 
