@@ -57,19 +57,24 @@ scene.add(dirLight);
 
 /* =========================================================
    STUDIO BACKDROP + BRANDING
-   - large interior sphere for soft studio look
-   - ground plane
-   - NU7 branding drawn to a canvas texture on a plane behind avatar
+   - Soft natural lighting from side windows
+   - Warm wooden flooring
+   - Neutral pastel walls
+   - Indoor plants
+   - Rolled yoga mats
+   - Minimal, peaceful aesthetic
 ========================================================= */
 
-// Yoga studio styling
+// Calm yoga studio color palette
 const PALETTE = {
-  wallTop: 0xf6f6f4,     // off-white
-  wallBottom: 0xe6efe8,  // very light sage
-  floor: 0xe9e2d0,       // warm beige
-  mat: 0x9fbfae,         // sage green
-  accent: 0xcbb3d6,      // soft purple
-  brandCircle: 0x7fb8b0   // muted teal
+  wallLeft: 0xf5f3f0,      // warm off-white
+  wallRight: 0xf0f5f1,     // soft sage tint
+  wallBack: 0xebe8e5,      // neutral beige
+  floorWood: 0xd4a574,     // warm wood tone
+  mat: 0xa8c5b8,           // sage green mat
+  plant: 0x5a7a6a,         // muted forest green
+  window: 0xe8f4f8,        // soft window light
+  accent: 0xd9ccc3         // warm taupe accent
 };
 
 // create a rear wall using a canvas gradient texture
@@ -86,7 +91,7 @@ function createWallTexture() {
   ctx.fillRect(0, 0, size, size);
 
   // subtle vertical texture (soft strokes)
-  ctx.fillStyle = 'rgba(255,255,255,0.03)';
+  ctx.fillStyle = 'rgba(9, 133, 131, 0.03)';
   for (let i = 0; i < 60; i++) {
     const x = (i / 60) * size;
     ctx.fillRect(x, 0, 2, size);
@@ -175,7 +180,7 @@ matTexCanvas.width = 512;
 matTexCanvas.height = 512;
 const mctx = matTexCanvas.getContext('2d');
 // base
-mctx.fillStyle = '#9fbfae';
+mctx.fillStyle = '#2ddffaff';
 mctx.fillRect(0, 0, 512, 512);
 // subtle fabric strokes
 mctx.fillStyle = 'rgba(0,0,0,0.03)';
@@ -291,7 +296,7 @@ function checkReady() {
 }
 
 loader.load(
-  "/avatar/avatar.glb",
+  "/avatar/avatar_2.glb",
   (gltf) => {
     const model = gltf.scene;
     scene.add(model);
@@ -340,13 +345,21 @@ loader.load(
 ========================================================= */
 
 const imuToBone = {
-  IMU1: "mixamorig1LeftLeg",      // Left foot
-  IMU2: "mixamorig1LeftFoot",     // Right foot
-  IMU3: "mixamorig1RightLeg",     // Left pelvis
-  IMU4: "mixamorig1RightFoot",       // Left knee (working fine, keep as is)
-  IMU5: "mixamorig1LeftUpLeg",    // Right pelvis
-  IMU6: "mixamorig1RightUpLeg",      // Right knee
+  IMU1: "ORG-thighL",        // Left thigh (pelvis)
+  IMU2: "ORG-shinL",         // Left shin (knee)
+  IMU3: "foot_ik.L",         // Left foot
+  IMU4: "ORG-thighR",        // Right thigh (pelvis)
+  IMU5: "ORG-shinR",         // Right shin (knee)
+  IMU6: "foot_ik.R",         // Right foot
 };
+// const imuToBone = {
+//   IMU1: "mixamorig1LeftLeg",      // Left foot
+//   IMU2: "mixamorig1LeftFoot",     // Right foot
+//   IMU3: "mixamorig1RightLeg",     // Left pelvis
+//   IMU4: "mixamorig1RightFoot",       // Left knee (working fine, keep as is)
+//   IMU5: "mixamorig1LeftUpLeg",    // Right pelvis
+//   IMU6: "mixamorig1RightUpLeg",      // Right knee
+// };
 /*'''
 Wearable Labelling 
 IMU 1 : left knee 
