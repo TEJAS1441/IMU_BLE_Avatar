@@ -2,9 +2,11 @@ import * as THREE from "https://unpkg.com/three@0.155.0/build/three.module.js";
 import { GLTFLoader } from "https://unpkg.com/three@0.155.0/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "https://unpkg.com/three@0.155.0/examples/jsm/controls/OrbitControls.js";
 
+
 /* =========================================================
    GLOBAL STATE (FIX: DECLARED AT TOP LEVEL)
 ========================================================= */
+
 
 let skeleton = null;
 
@@ -15,6 +17,8 @@ let modelStudioLights = [];
 const bones = {};
 const boneRestQuat = {};
 
+// resolved mapping from IMU key -> actual bone object (populated after model load)
+const boneMap = {}
 /* =========================================================
    BASIC THREE.JS SETUP
 ========================================================= */
@@ -1134,8 +1138,63 @@ function frameScene(object = scene, padding = 1.2) {
   }
 }
 
+/**
+ * Try to find actual bone objects for each imuToBone entry.
+ * Fallbacks:
+ *  - exact name match
+ *  - case-insensitive contains match on meaningful tokens (e.g. 'thigh','shin','foot','ankle','L','R')
+ */
+function resolveImuBoneMapping() {
+  if (!skeleton) return;
+  const available = Object.keys(bones);
+  console.log("Resolving IMU→bone mapping against available bones:", available.length);
+
+  for (const imuKey in imuToBone) {
+    const desired = imuToBone[imuKey];
+    let foundBone = null;
+
+    // 1) exact match
+    if (bones[desired]) {
+      foundBone = bones[desired];
+    } else {
+      // 2) try tokens from desired name
+      const tokens = desired.replace(/[^a-zA-Z0-9_.-]/g, ' ').split(/[\s_.-]+/).filter(Boolean).map(t => t.toLowerCase());
+      // try to prefer name contains all tokens or any token
+      for (const name of Object.keys(bones)) {
+        const lname = name.toLowerCase();
+        const allMatch = tokens.every(t => lname.includes(t));
+        const anyMatch = tokens.some(t => lname.includes(t));
+        if (allMatch) { foundBone = bones[name]; break; }
+        if (!foundBone && anyMatch) foundBone = bones[name];
+      }
+
+      // 3) last-resort: search common keywords present in desired
+      if (!foundBone) {
+        const keywords = ['thigh', 'shin', 'calf', 'foot', 'ankle', 'hip', 'knee', 'pelvis', 'spine', 'chest', 'head', 'neck'];
+        for (const kw of keywords) {
+          if (desired.toLowerCase().includes(kw)) {
+            for (const name of Object.keys(bones)) {
+              if (name.toLowerCase().includes(kw)) { foundBone = bones[name]; break; }
+            }
+            if (foundBone) break;
+          }
+        }
+      }
+    }
+
+    if (foundBone) {
+      boneMap[imuKey] = foundBone;
+      // ensure we have a rest quaternion for this bone name
+      if (!boneRestQuat[foundBone.name]) boneRestQuat[foundBone.name] = foundBone.quaternion.clone();
+      console.log(`Mapped ${imuKey} -> ${foundBone.name}`);
+    } else {
+      console.warn(`Could not resolve bone for IMU '${imuKey}' (requested '${desired}')`);
+    }
+  }
+}
+
 loader.load(
-  "/avatar/avatar_3.glb",
+  "/avatar/male_sports_defaultRig.glb",
   (gltf) => {
     const model = gltf.scene;
     scene.add(model);
@@ -1150,6 +1209,8 @@ loader.load(
         });
 
         console.log("Bones:", Object.keys(bones));
+        // resolve IMU -> actual bone objects now that bones[] is populated
+        resolveImuBoneMapping();
       }
     });
 
@@ -1185,26 +1246,30 @@ loader.load(
   }
 );
 
+
+
 /* =========================================================
    IMU → BONE MAPPING (BOTTOM WEARABLE)
 ========================================================= */
 
-const imuToBone = {
-  IMU1: "ORG-thighL",        // Left thigh (pelvis)
-  IMU2: "ORG-shinL",         // Left shin (knee)
-  IMU3: "foot_ik.L",         // Left foot
-  IMU4: "ORG-thighR",        // Right thigh (pelvis)
-  IMU5: "ORG-shinR",         // Right shin (knee)
-  IMU6: "foot_ik.R",         // Right foot
-};
 // const imuToBone = {
-//   IMU1: "mixamorig1LeftLeg",      // Left foot
-//   IMU2: "mixamorig1LeftFoot",     // Right foot
-//   IMU3: "mixamorig1RightLeg",     // Left pelvis
-//   IMU4: "mixamorig1RightFoot",       // Left knee (working fine, keep as is)
-//   IMU5: "mixamorig1LeftUpLeg",    // Right pelvis
-//   IMU6: "mixamorig1RightUpLeg",      // Right knee
+//   IMU1: "ORG-thighL",        // Left thigh (pelvis)
+//   IMU2: "ORG-shinL",         // Left shin (knee)
+//   IMU3: "foot_ik.L",         // Left foot
+//   IMU4: "ORG-thighR",        // Right thigh (pelvis)
+//   IMU5: "ORG-shinR",         // Right shin (knee)
+//   IMU6: "foot_ik.R",         // Right foot
 // };
+
+// IMU mapping for male_sports_defaultRig.glb avatar
+const imuToBone = {
+  IMU1: "mixamorig5LeftLeg",      // Left foot
+  IMU2: "mixamorig5LeftFoot",     // Right foot
+  IMU3: "mixamorig5RightLeg",     // Left pelvis
+  IMU4: "mixamorig5RightFoot",       // Left knee (working fine, keep as is)
+  IMU5: "mixamorig5LeftUpLeg",    // Right pelvis
+  IMU6: "mixamorig5RightUpLeg",      // Right knee
+};
 /*'''
 Wearable Labelling 
 IMU 1 : left knee 
@@ -1252,7 +1317,7 @@ ws.onmessage = (event) => {
 
   for (const imuKey in imuToBone) {
     const boneName = imuToBone[imuKey];
-    const bone = bones[boneName];
+    const bone = boneMap[imuKey] || bones[boneName];
     const q = sensors[imuKey];
 
     if (!bone || !q) continue;
@@ -1262,9 +1327,11 @@ ws.onmessage = (event) => {
     // apply calibration if available: bone = rest * calibration * imuQuat
     const cal = calibration[imuKey];
     if (cal) {
-      bone.quaternion.copy(boneRestQuat[boneName]).multiply(cal).multiply(imuQuat);
+      const rest = boneRestQuat[bone.name] || bone.quaternion.clone();
+      bone.quaternion.copy(rest).multiply(cal).multiply(imuQuat);
     } else {
-      bone.quaternion.copy(boneRestQuat[boneName]).multiply(imuQuat);
+      const rest = boneRestQuat[bone.name] || bone.quaternion.clone();
+      bone.quaternion.copy(rest).multiply(imuQuat);
     }
   }
 };

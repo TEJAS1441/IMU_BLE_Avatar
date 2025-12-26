@@ -58,7 +58,6 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-
 connected_devices = {}  # mac -> BleakClient
 quaternion_data = {}    # mac -> {imu_id -> 8-byte data}
 
